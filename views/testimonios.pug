@@ -1,0 +1,33 @@
+extends ./layout/index
+
+block contenido 
+  main.container.mt-5 
+    h1.text-center.mt-5 #{pagina}
+
+    blockquote.text-center Leer sobre nustros clientes y sus experiencias 
+    include ./layout/bloque_testimonio
+
+    .row  
+      
+      .col-md-12 
+        h2.d-block.w-100.text-center agregar testimonio
+        
+        if(errores)
+          each error in errores 
+            .alert.col.alert-danger.text-center= error.mensajes
+
+      .row.justify-content-center.col
+        .col-md-8  
+          form(action="/testimonios", method="post") 
+            .form-group 
+              label(for="nombre") nombre
+              input#nombre(type="text", placeholder="tu nombre", name="nombre", class="form-control", value= nombre)
+            .form-group 
+              label(for="correo") correo
+              input#correo(type="text", placeholder="tu correo", name="correo", class="form-control", value= correo)
+            .form-group 
+              label(for="mensaje") mensaje
+              textarea#mensaje(placeholder="tu mensaje", name="mensaje", class="form-control", rows= 3)= mensaje
+
+            input.btn.btn-success.btn-block(type="submit")
+        
